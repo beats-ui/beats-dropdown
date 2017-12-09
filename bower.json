@@ -1,0 +1,17 @@
+{
+  "name": "beats-dropdown",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "ashvin777 <ashvin.suthar777@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/beats-ui/beats-dropdown",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,7 @@
+.dropdown {
+  display: inline-block;
+  position: relative; }
+  .dropdown .content {
+    display: none; }
+  .dropdown.active .content {
+    display: inline-block; }

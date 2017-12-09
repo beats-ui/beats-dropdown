@@ -1,0 +1,14 @@
+.dropdown {
+  display: inline-block;
+  position: relative;
+
+  .content {
+    display: none;
+  }
+
+  &.active {
+    .content {
+      display: inline-block;
+    }
+  }
+}
