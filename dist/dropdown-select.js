@@ -81,10 +81,10 @@
 
       var _this = _possibleConstructorReturn(this, (DropdownSelect.__proto__ || Object.getPrototypeOf(DropdownSelect)).call(this, selector, options));
 
-      _this._value = _this._options.value;
       _this._label = _this._openner.querySelector('label');
 
       _this._attachAdditionalEvents();
+      _this.setValue(_this._options.value);
       return _this;
     }
 
@@ -105,10 +105,20 @@
         var value = ev.target.getAttribute('value');
 
         if (this._options.onSelect instanceof Function) {
-          this._label.innerText = value;
+          this.setValue(value);
           this.hide();
           this._options.onSelect(value);
         }
+      }
+    }, {
+      key: 'setValue',
+      value: function setValue(value) {
+        this._label.innerText = value;
+      }
+    }, {
+      key: 'getValue',
+      value: function getValue() {
+        return this._label.innerText;
       }
     }]);
 

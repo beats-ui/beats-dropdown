@@ -1,13 +1,13 @@
 import DropdownBase from './dropdown-base';
 
-export default class DropdownSelect extends DropdownBase{
+export default class DropdownSelect extends DropdownBase {
   constructor(selector, options) {
     super(selector, options);
 
-    this._value = this._options.value;
     this._label = this._openner.querySelector('label');
 
     this._attachAdditionalEvents();
+    this.setValue(this._options.value);
   }
 
   _attachAdditionalEvents() {
@@ -22,10 +22,18 @@ export default class DropdownSelect extends DropdownBase{
     let value = ev.target.getAttribute('value');
 
     if (this._options.onSelect instanceof Function) {
-      this._label.innerText = value;
+      this.setValue(value);
       this.hide();
       this._options.onSelect(value);
     }
+  }
+
+  setValue(value) {
+    this._label.innerText = value;
+  }
+
+  getValue() {
+    return this._label.innerText;
   }
 
 }
