@@ -10,4 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  let dropdown2 = new DropdownSelect('#dropdown2', {
+    type: 'select',
+    value: 'mercedes',
+    onSelect: (item) => {
+      console.log(item);
+    }
+  });
+
 });

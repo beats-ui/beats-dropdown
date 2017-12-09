@@ -30,5 +30,13 @@
         console.log(item);
       }
     });
+
+    var dropdown2 = new _dropdownSelect2.default('#dropdown2', {
+      type: 'select',
+      value: 'mercedes',
+      onSelect: function onSelect(item) {
+        console.log(item);
+      }
+    });
   });
 });
