@@ -4,7 +4,5 @@ html, body {
   font-family: 'Roboto', sans-serif;
   margin: 1rem; }
 
-.container {
-  height: 100px;
-  overflow: hidden;
-  border: 1px solid lightblue; }
+* {
+  box-sizing: border-box; }

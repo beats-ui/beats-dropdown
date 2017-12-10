@@ -41,73 +41,118 @@
     };
   }();
 
-  var SELECTORS = {
-    OPENNER: '.openner',
-    CONTENT: '.content',
-    DROPDOWN: '.dropdown'
-  };
-
-  var CLASSES = {
-    ACTIVE: 'active'
-  };
-
-  var TYPES = {
-    SELECT: 'select'
-  };
-
   var Dropdown = function () {
     function Dropdown(selector, options) {
       _classCallCheck(this, Dropdown);
 
-      this._dropdown = document.querySelector(selector);
-      this._options = options;
+      this.selector = selector;
+      this.options = options;
 
-      if (this._dropdown instanceof HTMLElement) {
-        this._openner = this._dropdown.querySelector(SELECTORS.OPENNER);
-        this._content = this._dropdown.querySelector(SELECTORS.CONTENT);
-        this._dropdown.classList.add(this._options.type || '');
-
-        //TODO - Throw error if openner and content are not available or of not HTMLInput type
-        this._bindEvents();
-      }
+      this.init();
+      this.bind();
     }
 
     _createClass(Dropdown, [{
-      key: '_bindEvents',
-      value: function _bindEvents() {
-        document.addEventListener('click', this._onDocumentClick.bind(this));
-        this._openner.addEventListener('click', this._onOpennerClick.bind(this));
+      key: 'init',
+      value: function init() {
+        this.dropdown = document.querySelector(this.selector);
+        document.addEventListener('click', this.onDocumentClick.bind(this));
+
+        if (this.dropdown instanceof HTMLElement) {
+          this.placeholder = this.dropdown.querySelector('.dropdown-placeholder');
+          this.menu = this.dropdown.querySelector('.dropdown-menu');
+          this.menuItems = this.menu.querySelectorAll('.dropdown-item');
+        }
+
+        if (this.options.value) {
+          this.setValue(this.options.value);
+        }
       }
     }, {
-      key: '_onDocumentClick',
-      value: function _onDocumentClick(ev) {
-        if (ev.target.closest(SELECTORS.DROPDOWN) !== this._dropdown) {
+      key: 'bind',
+      value: function bind() {
+        var _this = this;
+
+        this.placeholder.addEventListener('click', this.onClickPlaceholder.bind(this));
+
+        this.menuItems.forEach(function (menuItem) {
+          menuItem.addEventListener('click', _this.onClickMenuItem.bind(_this));
+        });
+      }
+    }, {
+      key: 'onDocumentClick',
+      value: function onDocumentClick(ev) {
+        if (ev.target.closest('.dropdown') !== this.dropdown) {
           this.hide();
         }
       }
     }, {
-      key: '_onOpennerClick',
-      value: function _onOpennerClick() {
+      key: 'onClickPlaceholder',
+      value: function onClickPlaceholder(ev) {
         this.toggle();
+      }
+    }, {
+      key: 'onClickMenuItem',
+      value: function onClickMenuItem(ev) {
+        this.setValue(ev.currentTarget.dataset.value);
+        this.hide();
+      }
+    }, {
+      key: 'setValue',
+      value: function setValue(value) {
+        this.placeholder.innerHTML = this.getTextByValue(value);
+      }
+    }, {
+      key: 'getTextByValue',
+      value: function getTextByValue(value) {
+        var text = '';
+
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = this.menuItems[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var menuItem = _step.value;
+
+            if (menuItem.dataset.value == value) {
+              text = menuItem.innerHTML;
+              break;
+            }
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+
+        ;
+
+        return text;
       }
     }, {
       key: 'toggle',
       value: function toggle() {
-        this._dropdown.classList.toggle(CLASSES.ACTIVE);
+        this.dropdown.classList.toggle('active');
       }
     }, {
       key: 'show',
       value: function show() {
-        if (this._dropdown.classList.contains(CLASSES.ACTIVE) === false) {
-          this._dropdown.classList.add(CLASSES.ACTIVE);
-        }
+        this.dropdown.classList.add('active');
       }
     }, {
       key: 'hide',
       value: function hide() {
-        if (this._dropdown.classList.contains(CLASSES.ACTIVE) === true) {
-          this._dropdown.classList.remove(CLASSES.ACTIVE);
-        }
+        this.dropdown.classList.remove('active');
       }
     }]);
 

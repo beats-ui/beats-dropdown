@@ -1,19 +1,19 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['./dropdown-select'], factory);
+    define(['./dropdown'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(require('./dropdown-select'));
+    factory(require('./dropdown'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(global.dropdownSelect);
+    factory(global.dropdown);
     global.index = mod.exports;
   }
-})(this, function (_dropdownSelect) {
+})(this, function (_dropdown) {
   'use strict';
 
-  var _dropdownSelect2 = _interopRequireDefault(_dropdownSelect);
+  var _dropdown2 = _interopRequireDefault(_dropdown);
 
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -23,20 +23,8 @@
 
   document.addEventListener('DOMContentLoaded', function () {
 
-    var dropdown = new _dropdownSelect2.default('#dropdown1', {
-      type: 'select',
-      value: 'car',
-      onSelect: function onSelect(item) {
-        console.log(item);
-      }
-    });
-
-    var dropdown2 = new _dropdownSelect2.default('#dropdown2', {
-      type: 'select',
-      value: 'mercedes',
-      onSelect: function onSelect(item) {
-        console.log(item);
-      }
+    var dropdown = new _dropdown2.default('#dropdown1', {
+      value: 'action2'
     });
   });
 });

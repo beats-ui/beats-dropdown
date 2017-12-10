@@ -1,7 +1,5 @@
-.dropdown {
-  display: inline-block;
-  position: relative; }
-  .dropdown .content {
-    display: none; }
-  .dropdown.active .content {
-    display: inline-block; }
+.dropdown .dropdown-menu {
+  display: none; }
+
+.dropdown.active .dropdown-menu {
+  display: inline-block; }

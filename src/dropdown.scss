@@ -1,0 +1,16 @@
+
+.dropdown{
+  .dropdown-placeholder{
+    
+  }
+
+  .dropdown-menu{
+    display: none;
+  }
+
+  &.active{
+    .dropdown-menu{
+      display: inline-block;
+    }
+  }
+}

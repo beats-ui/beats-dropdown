@@ -62,6 +62,11 @@
       this._root = document.querySelector(selector);
       this._options = options;
 
+      this._label = this._openner.querySelector('label');
+
+      this._attachAdditionalEvents();
+      this.setValue(this._options.value);
+
       if (this._root instanceof HTMLElement) {
         this._openner = this._root.querySelector(SELECTORS.OPENNER);
         this._content = this._root.querySelector(SELECTORS.CONTENT);
@@ -89,6 +94,38 @@
       key: '_onOpennerClick',
       value: function _onOpennerClick() {
         this.toggle();
+      }
+    }, {
+      key: '_attachAdditionalEvents',
+      value: function _attachAdditionalEvents() {
+        var _this = this;
+
+        var lis = this._content.querySelectorAll('li');
+
+        lis.forEach(function (li) {
+          li.addEventListener('click', _this._onSelect.bind(_this));
+        });
+      }
+    }, {
+      key: '_onSelect',
+      value: function _onSelect(ev) {
+        var value = ev.target.getAttribute('value');
+
+        if (this._options.onSelect instanceof Function) {
+          this.setValue(value);
+          this.hide();
+          this._options.onSelect(value);
+        }
+      }
+    }, {
+      key: 'setValue',
+      value: function setValue(value) {
+        this._label.innerText = value;
+      }
+    }, {
+      key: 'getValue',
+      value: function getValue() {
+        return this._label.innerText;
       }
     }, {
       key: 'toggle',

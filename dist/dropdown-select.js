@@ -31,24 +31,6 @@
     }
   }
 
-  var _createClass = function () {
-    function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-      }
-    }
-
-    return function (Constructor, protoProps, staticProps) {
-      if (protoProps) defineProperties(Constructor.prototype, protoProps);
-      if (staticProps) defineProperties(Constructor, staticProps);
-      return Constructor;
-    };
-  }();
-
   function _possibleConstructorReturn(self, call) {
     if (!self) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -79,48 +61,8 @@
     function DropdownSelect(selector, options) {
       _classCallCheck(this, DropdownSelect);
 
-      var _this = _possibleConstructorReturn(this, (DropdownSelect.__proto__ || Object.getPrototypeOf(DropdownSelect)).call(this, selector, options));
-
-      _this._label = _this._openner.querySelector('label');
-
-      _this._attachAdditionalEvents();
-      _this.setValue(_this._options.value);
-      return _this;
+      return _possibleConstructorReturn(this, (DropdownSelect.__proto__ || Object.getPrototypeOf(DropdownSelect)).call(this, selector, options));
     }
-
-    _createClass(DropdownSelect, [{
-      key: '_attachAdditionalEvents',
-      value: function _attachAdditionalEvents() {
-        var _this2 = this;
-
-        var lis = this._content.querySelectorAll('li');
-
-        lis.forEach(function (li) {
-          li.addEventListener('click', _this2._onSelect.bind(_this2));
-        });
-      }
-    }, {
-      key: '_onSelect',
-      value: function _onSelect(ev) {
-        var value = ev.target.getAttribute('value');
-
-        if (this._options.onSelect instanceof Function) {
-          this.setValue(value);
-          this.hide();
-          this._options.onSelect(value);
-        }
-      }
-    }, {
-      key: 'setValue',
-      value: function setValue(value) {
-        this._label.innerText = value;
-      }
-    }, {
-      key: 'getValue',
-      value: function getValue() {
-        return this._label.innerText;
-      }
-    }]);
 
     return DropdownSelect;
   }(_dropdownBase2.default);
